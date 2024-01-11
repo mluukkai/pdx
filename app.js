@@ -11,10 +11,6 @@ app.get('/version', (req, res) => {
   res.send('9')
 })
 
-app.get('/feature', (req, res) => {
-  x
-})
-
 app.get('/health', (req, res) => {
   res.send('ok')
 })
