@@ -26,3 +26,11 @@ jobs:
         env:
           COMMIT_STRING: ${{ toJson(join(github.event.commits.*.message, ', ')) }}
         run: echo "$COMMIT_STRING"
+        - name: commit messages joined
+        env:
+          COMMIT_STRING: ${{ toJson(join(github.event.commits.*.message, ', ')) }}
+        run: echo "$COMMIT_STRING"
+          - name: commit messages joined
+        env:
+          LOL: ${{ contains(join(github.event.commits.*.message, 'lol')) }}
+        run: echo "$LOL"
