@@ -19,3 +19,7 @@ jobs:
         if: env.LOL == true
         run: |
           echo "Hello World!"
+      - name: Say shit
+        if: env.LOL != true
+        run: |
+          echo "Hello shit"
