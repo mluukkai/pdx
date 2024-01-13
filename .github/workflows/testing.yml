@@ -10,27 +10,11 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
-      - name: github context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: commits
-        env:
-          COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS"
-      - name: commit messages
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
-      - name: commit messages joined
-        env:
-          COMMIT_STRING: ${{ toJson(join(github.event.commits.*.message, ', ')) }}
-        run: echo "$COMMIT_STRING"
-      - name: commit messages joined
-        env:
-          COMMIT_STRING: ${{ toJson(join(github.event.commits.*.message, ', ')) }}
-        run: echo "$COMMIT_STRING"
       - name: has lol
         env:
           LOL: ${{ contains(join(github.event.commits.*.message), 'lol') }}
         run: echo "$LOL"
+      - name: Say hello
+        if: ${{ $LOL }}
+        run: |
+          echo "Hello World!"
