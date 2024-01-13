@@ -14,7 +14,6 @@ jobs:
         env:
           LOL: ${{ contains(join(github.event.commits.*.message), 'lol') }}
         run: echo "$LOL"
-      - run: echo env.LOL
       - name: Say hello
         if: env.LOL == true
         run: |
