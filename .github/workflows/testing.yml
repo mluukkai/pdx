@@ -22,3 +22,7 @@ jobs:
         if: env.LOL != true
         run: |
           echo "Hello shit"
+      - name: Say shit
+        if: ${{ contains(join(github.event.commits.*.message), 'lol') }}
+        run: |
+          echo "Hello x"
