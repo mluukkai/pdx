@@ -16,6 +16,6 @@ jobs:
         run: echo "$LOL"
       - run: echo env.LOL
       - name: Say hello
-        if: env.LOL
+        if: {{ env.LOL }}
         run: |
           echo "Hello World!"
