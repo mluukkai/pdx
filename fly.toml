@@ -4,11 +4,14 @@ primary_region = "cdg"
 
 [build]
 
+[deploy]
+  strategy = "canary"
+
 [env]
   PORT = "3000"
 
 [processes]
-  app = "node app.js" # add this
+  app = "node app.js"
 
 [http_service]
   internal_port = 3000
