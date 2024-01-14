@@ -20,7 +20,7 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
       - name: Dump GitHub context
         env:
-          GITHUB_CONTEXT: ${{ toJson(github.head_commit) }}
+          GITHUB_CONTEXT: ${{ toJson(github.event) }}
         run: echo "$GITHUB_CONTEXT"
       - run: npm install
       - run: npm run eslint
