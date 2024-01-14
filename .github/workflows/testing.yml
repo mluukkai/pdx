@@ -22,6 +22,10 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github.head_commit) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: Test Success
         uses: rjstone/discord-webhook-notify@v1
         if: success()
