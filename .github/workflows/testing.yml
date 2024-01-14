@@ -20,7 +20,7 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
       - name: Dump GitHub context
         env:
-          GITHUB_CONTEXT: ${{ toJson(github.event) }}
+          GITHUB_CONTEXT: ${{ toJson(github.event.head_commit) }}
         run: echo "$GITHUB_CONTEXT"
       - run: npm install
       - run: npm run eslint
@@ -38,6 +38,6 @@ jobs:
         if: failure()
         with:
             text: 'Build failed'
-            description: commit ${{ github.head_commit.url }} by ${{ github.actor }} broke the build :(
+            description: commit ${{ github.event.head_commit.url }} by ${{ github.actor }} broke the build :(
             severity: error
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
