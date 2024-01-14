@@ -27,8 +27,7 @@ jobs:
         if: success()
         with:
             severity: info
-            description: to https://kopy.fly.dev/ by
-            details: Test Succeeded!
+            description: to https://kopy.fly.dev/ by ${{ github.actor }}
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
             text: 'A new version of Pokedex deployed'
       - name: Test Failure
