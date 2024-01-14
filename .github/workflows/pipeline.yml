@@ -3,9 +3,9 @@ name: Deployment pipeline
 on:
   push:
     branches:
-      - main1
+      - main
   pull_request:
-    branches: [main1]
+    branches: [main]
     types: [opened, synchronize]
 
 jobs:
@@ -56,3 +56,23 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: false
+  notify:
+    needs: [lint_and_test, deploy]
+    runs-on: ubuntu-20.04
+    steps:    
+      - name: Build success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+            severity: info
+            description: to https://pdex.fly.dev/ by ${{ github.actor }}
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+            text: 'A new version of Pokedex deployed'
+      - name: Build failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+            text: 'Build failed'
+            description: commit ${{ github.event.head_commit.url }} by ${{ github.actor }} broke the build :(
+            severity: error
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
