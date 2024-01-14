@@ -10,19 +10,11 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
-      - name: has lol
-        env:
-          LOL: ${{ contains(join(github.event.commits.*.message), 'lol') }}
-        run: echo "$LOL"
-      - name: Say hello
-        if: env.LOL == true
+      - name: not skipped
+        if: ${{ !contains(join(github.event.commits.*.message), '#skip') }}
         run: |
-          echo "Hello World!"
-      - name: Say shit
-        if: env.LOL != true
+          echo "NO SKIP"
+      - name: skipped
+        if: ${{ contains(join(github.event.commits.*.message), '#skip') }}
         run: |
-          echo "Hello shit"
-      - name: Say shit
-        if: ${{ contains(join(github.event.commits.*.message), 'lol') }}
-        run: |
-          echo "Hello x"
+          echo "SKIP"
