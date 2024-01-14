@@ -27,7 +27,7 @@ jobs:
         if: success()
         with:
             severity: info
-            description: to https://kopy.fly.dev/ by ${{ github.actor }}
+            description: to https://pdex.fly.dev/ by ${{ github.actor }}
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
             text: 'A new version of Pokedex deployed'
       - name: Test Failure
@@ -35,6 +35,6 @@ jobs:
         if: failure()
         with:
             text: 'Build failed'
+            description: commit ${{ github.head_commit.url }} by ${{ github.actor }} broke the build :(
             severity: error
-            details: Test Failed!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
