@@ -18,12 +18,16 @@ jobs:
         run: npm install
       - run: npm run eslint
       - run: npm test
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: Test Success
         uses: rjstone/discord-webhook-notify@v1
         if: success()
         with:
             severity: info
-            description: to https://kopy.fly.dev/ by ${{ username }}
+            description: to https://kopy.fly.dev/ by
             details: Test Succeeded!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
             text: 'A new version of Pokedex deployed'
