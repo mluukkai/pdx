@@ -13,7 +13,7 @@ app.get('/version', (req, res) => {
 app.get('/health', (req, res) => {
   // eslint-disable-next-line no-constant-condition
   if (false) throw('problems')
-  res.send('ok');
+  res.send('ok')
 })
 
 app.listen(PORT, () => {

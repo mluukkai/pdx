@@ -23,12 +23,15 @@ jobs:
         if: success()
         with:
             severity: info
+            description: to https://kopy.fly.dev/ by ${{ username }}
             details: Test Succeeded!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+            text: 'A new version of Pokedex deployed'
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
         with:
+            text: 'Build failed'
             severity: error
             details: Test Failed!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
