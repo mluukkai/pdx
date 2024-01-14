@@ -1,0 +1,12 @@
+name: Health check
+
+on:
+  schedule:
+    - cron: '* * * * *'
+
+jobs:
+  test_schedule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Every minute
+        run: date
