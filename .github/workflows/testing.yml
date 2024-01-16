@@ -22,4 +22,4 @@ jobs:
       - run: npm test
       - run: npm run build
       - name: Trigger deployment
-        run: curl ${{ secrets.RENDER_HOOK }}
+        run: curl ${{ secrets.RENDER_HOOK }}   

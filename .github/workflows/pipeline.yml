@@ -80,3 +80,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: false
+  deploy_render:
+    needs: [lint_and_test]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Trigger deployment
+        run: curl ${{ secrets.RENDER_HOOK }} 
