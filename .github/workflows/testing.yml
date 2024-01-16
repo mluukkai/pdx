@@ -20,7 +20,13 @@ jobs:
         run: npm install
       - run: npm run eslint
       - run: npm test
-      - run: npm run build
-      - name: Trigger deployment
-        run: curl ${{ secrets.RENDER_HOOK }}   
-
+      - run: npm run build 
+      - name: Wait for Render Deployment
+        uses: bounceapp/render-action@0.6.0
+        with:
+          render-token: ${{ secrets.RENDER_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          service-id: srv-cmii7hf109ks739m3kog
+          retries: 30
+          wait: 30000
+          sleep: 30000
