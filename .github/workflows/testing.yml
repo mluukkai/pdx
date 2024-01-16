@@ -12,12 +12,9 @@ jobs:
   lint_and_test:
     runs-on: ubuntu-20.04
     steps:
-      - name: Wait for Render Deployment
-        uses: bounceapp/render-action@0.6.0
+      - name: Deploy
+        uses: bankfliptech/deploy-to-render@v1
         with:
-          render-token: ${{ secrets.RENDER_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          service-id: ${{ secrets.RENDER_SERVICE_ID }}
-          retries: 20
-          wait: 16000
-          sleep: 30000
+          serviceId: ${{ secrets.RENDER_SERVICE_ID }}
+          apiKey: ${{ secrets.RENDER_TOKEN }}
+          deployHookURL: ${{ secrets.RENDER_HOOK }}
