@@ -21,10 +21,6 @@ jobs:
       - run: npm run eslint
       - run: npm test
       - run: npm run build
-  deploy_render:
-    needs: [lint_and_test] 
-    runs-on: ubuntu-20.04
-    steps:
       - name: Wait for Render Deployment
         uses: bounceapp/render-action@0.6.0
         with:
