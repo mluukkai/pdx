@@ -12,14 +12,12 @@ jobs:
   lint_and_test:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Wait for Render Deployment
+        uses: bounceapp/render-action@0.6.0
         with:
-          node-version: '20'
-      - name: Install dependencies
-        run: npm install
-      - run: npm run eslint
-      - run: npm test
-      - run: npm run build
-      - name: Trigger deployment
-        run: curl ${{ secrets.RENDER_HOOK }}   
+          render-token: ${{ secrets.RENDER_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          service-id: srv-xxxxxxxxxxxxxxxxxxxx
+          retries: 20
+          wait: 16000
+          sleep: 30000
