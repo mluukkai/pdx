@@ -22,18 +22,15 @@ jobs:
       - run: npm test
       - run: npm run build
   deploy_render:
-    needs: [lint_and_test]
+    needs: [lint_and_test] 
     runs-on: ubuntu-20.04
     steps:
-      - name: Wait for Deploy
-        runs-on: ubuntu-latest
-        steps:
-          - name: Wait for Render Deployment
-            uses: bounceapp/render-action@0.6.0
-            with:
-              render-token: ${{ secrets.RENDER_TOKEN }}
-              github-token: ${{ secrets.GITHUB_TOKEN }}
-              service-id: srv-cmii7hf109ks739m3kog
-              retries: 5
-              wait: 10000
-              sleep: 10000  
+      - name: Wait for Render Deployment
+        uses: bounceapp/render-action@0.6.0
+        with:
+          render-token: ${{ secrets.RENDER_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          service-id: srv-cmii7hf109ks739m3kog
+          retries: 5
+          wait: 10000
+          sleep: 10000  
