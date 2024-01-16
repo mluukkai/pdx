@@ -3,18 +3,14 @@ name: Deployment pipeline
 on:
   push:
     branches:
-      - main
+      - main1
   pull_request:
     branches: [main]
     types: [opened, synchronize]
 
 jobs:
-  lint_and_test:
+  deploy_render:
     runs-on: ubuntu-20.04
     steps:
-      - name: Deploy
-        uses: bankfliptech/deploy-to-render@v1
-        with:
-          serviceId: srv-${{ secrets.RENDER_SERVICE_ID }}
-          apiKey: ${{ secrets.RENDER_TOKEN }}
-          deployHookURL: ${{ secrets.RENDER_HOOK }}
+      - name: Trigger deployment
+        run: curl ${{ secrets.RENDER_HOOK }} 

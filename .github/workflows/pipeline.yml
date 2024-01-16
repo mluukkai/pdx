@@ -3,9 +3,9 @@ name: Deployment pipeline
 on:
   push:
     branches:
-      - main1
+      - main
   pull_request:
-    branches: [main1]
+    branches: [main]
     types: [opened, synchronize]
 
 jobs:
@@ -81,8 +81,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: false
   deploy_render:
-    needs: [lint_and_test]
     runs-on: ubuntu-20.04
+    needs: [lint_and_test]
     steps:
-      - name: Trigger deployment
-        run: curl ${{ secrets.RENDER_HOOK }} 
+      - name: Deploy
+        uses: bankfliptech/deploy-to-render@v1.0.3
+        with:
+          serviceId: srv-${{ secrets.RENDER_SERVICE_ID }}
+          apiKey: ${{ secrets.RENDER_TOKEN }}
+          deployHookURL: ${{ secrets.RENDER_HOOK }}
